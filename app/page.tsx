@@ -2,7 +2,7 @@
 
 
 import React, { useEffect, useRef, useState} from "react"
-import { Brush } from '../components'
+import { Brush, ControlsPanel, ColorPicker } from '../components'
 import cn from 'classnames'
 
 
@@ -11,7 +11,8 @@ import cn from 'classnames'
 
 const Canvas = ()  => {
 
-  const [brushSize, setBrushSize] = useState<number>(5);
+  const [brushColor, setBrushColor] = useState<string>('#000')
+  const [brushSize, setBrushSize] = useState<number>(20);
 
   function resizeBrush(e: KeyboardEvent) {
     if(e.code === "BracketLeft") {
@@ -94,6 +95,7 @@ const Canvas = ()  => {
 
       ctx.strokeStyle = "#212121"
       ctx.lineCap = "round"
+      ctx.lineJoin = 'round'
       ctx.lineWidth = brushSize;
 
       ctx?.beginPath()
@@ -126,7 +128,7 @@ const Canvas = ()  => {
               height={600}
           >
           </canvas>
-
+          <ColorPicker value={brushColor} setValue={setBrushColor}></ColorPicker>
          <Brush size={brushSize} className="hidden peer-hover/canvas:block"></Brush>
       </div>
   )
