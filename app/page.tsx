@@ -22,7 +22,6 @@ const Canvas = ()  => {
 
     } else if (e.code === "BracketRight") {
         setBrushSize(brushSize + 4)
-
     }
   }
 
@@ -41,7 +40,9 @@ const Canvas = ()  => {
   if(ctx) {
     ctx.strokeStyle = "#212121"
     ctx.lineCap = "round"
-    ctx.lineWidth = brushSize;
+    ctx.lineJoin = 'round'
+    ctx.strokeStyle = brushColor
+
   }
 
   // Получаем координаты канваса
@@ -71,8 +72,11 @@ const Canvas = ()  => {
       const coord = computePointInCanvas(e);
       if(!coord) return
 
+      ctx.lineWidth = brushSize
+
       ctx.lineTo(coord.x, coord.y)
       ctx.stroke()
+
 
         if( coord.x < coord.left 
           || coord.x > coord.right 
@@ -93,13 +97,12 @@ const Canvas = ()  => {
       if(!coord) return 
       if(!ctx) return
 
-      ctx.strokeStyle = "#212121"
-      ctx.lineCap = "round"
-      ctx.lineJoin = 'round'
       ctx.lineWidth = brushSize;
 
-      ctx?.beginPath()
-      ctx?.moveTo(coord.x, coord.y)
+      ctx.beginPath()
+      ctx.moveTo(coord.x, coord.y)
+      ctx.lineTo(coord.x, coord.y)
+      ctx.stroke()
   }
 
 

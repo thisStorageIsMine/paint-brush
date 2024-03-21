@@ -21,6 +21,8 @@ const ColorPicker = ({ value='#000000', setValue ,className, ...props}: ColorPic
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         const text = e.currentTarget.value
         setValue(text);
+        // setColor(text);
+
     }
 
     function isValidHex(e: React.FocusEvent<HTMLInputElement>) {
@@ -31,6 +33,8 @@ const ColorPicker = ({ value='#000000', setValue ,className, ...props}: ColorPic
         };
 
         setValue(text);
+        // setColor(text);
+
     }
 
     const pickerId = `color-picker`,
@@ -47,7 +51,7 @@ const ColorPicker = ({ value='#000000', setValue ,className, ...props}: ColorPic
                 <div className={classes.blur} style={{backgroundColor: value}}></div>
             </label>
 
-            <section className="relative pl-5">
+            <section className="relative pl-5" key={value}>
                 <div className="absolute -top-3 left-5 text-sm text-gray-300">Hex</div>
                 <input className={classes.hexInput} type="text" onBlur={(e) => isValidHex(e)} id={hexPickerID} defaultValue={value} style={{borderColor: value}} />
             </section>
