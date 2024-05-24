@@ -1,15 +1,16 @@
 import { ControlsPanelProps } from './ControlsPanel.props';
-import {  MaterialPicker } from 'react-color';
-import { useState } from 'react';
-import cn from 'classnames';
+import { ColorPicker } from '../ColorPicker/ColorPicker';
+import { BrushSizeInput } from '../BrushSizeInput/BrushSizeInput';
+import { SaveImageButton } from '../SaveImageButton/SaveImageButton';
 
-const ControlsPanel = ({}: ControlsPanelProps) => {
-    const [color, setColor] = useState<string>('#000')
+const ControlsPanel = ({ onBtnClick }: ControlsPanelProps) => {
 
     return (
-        <div className='p-5'>
-            <MaterialPicker color={color} onChange={(e) => setColor(e.hex)} className='w-[110px] h-fit' />
-        </div>
+        <section className='flex p-4 justify-between items-center rounded-xl  bg-white shadow-md'>
+            <ColorPicker></ColorPicker>
+            <BrushSizeInput></BrushSizeInput>
+            <SaveImageButton onClick={onBtnClick}>Download</SaveImageButton>
+        </section>
     )
 }
 

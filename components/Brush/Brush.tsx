@@ -1,10 +1,12 @@
 'use client'
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
 import { BrushProps } from "./Brush.props"
+import { BrushContext } from "@/app/context";
 import cn from 'classnames';
 
-const Brush = ({size, className, ...props}: BrushProps) => {
+const Brush = ({ className, ...props }: BrushProps) => {
+    const { brush } = useContext(BrushContext)
 
     const brushRef = useRef<HTMLSpanElement>(null);
 
@@ -14,8 +16,8 @@ const Brush = ({size, className, ...props}: BrushProps) => {
         return () => window.removeEventListener("mousemove", brushHandleMouseMove)
     }, [])
 
-    function brushHandleMouseMove({clientX: x, clientY: y}: MouseEvent) {
-        if(!brushRef.current) return
+    function brushHandleMouseMove({ clientX: x, clientY: y }: MouseEvent) {
+        if (!brushRef.current) return
 
         // brushRef.current.style.transform = `translate(${x}px, ${y}px)`;
         brushRef.current.style.top = `${y}px`;
@@ -29,7 +31,7 @@ const Brush = ({size, className, ...props}: BrushProps) => {
         <span
             ref={brushRef}
             className={cn(`absolute left-0 top-0 pointer-events-none border-2 rounded-full aspect-square -translate-x-1/2 -translate-y-1/2`, className)}
-            style={{width: `${size+ 6}px`}}
+            style={{ width: `${brush.size + 6}px` }}
             {...props}
         >
 
